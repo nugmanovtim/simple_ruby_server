@@ -5,13 +5,16 @@ class BasicController
     @request = request
   end
 
-  def render(path, status: '200 OK')
-    @response_body = IO.read(path)
-    "#{response_headers(status)}\n#{@response_body}"
+  def render(path, status: 200)
+    @body = IO.read(path)
+    @status = status
+    http_response
   end
 
-  def redirect_to(path, status: '302 Found')
-    redirected_headers(path, status)
+  def redirect_to(path, status: 302)
+    @redirect_path = path
+    @status = status
+    http_response
   end
 
   def no_routes_matched
@@ -20,19 +23,28 @@ class BasicController
 
   private
 
-  def response_headers(status)
-    "HTTP/1.1 #{status}\n"\
+  def http_response
+    if @status == 302
+      redirect_headers
+    else
+      response_headers << @body
+    end
+  end
+
+  def response_headers
+    "HTTP/1.1 #{@status}\n"\
     "Content-Type: text/html; charset=utf-8\n"\
     "Cache-Control: no-cache\n"\
     "Date: #{Time.now.rfc822}\n"\
     "Server: TestServer\n"\
-    "Content-Length: #{@response_body.bytesize}\n"
+    "Content-Length: #{@body.bytesize}\n"\
+    "\n"
   end
 
-  def redirected_headers(path, status)
-    "HTTP/1.1 #{status}\n"\
+  def redirect_headers
+    "HTTP/1.1 #{@status}\n"\
     "Content-Type: text/html; charset=utf-8\n"\
-    "Location: #{path}\n"\
+    "Location: #{@redirect_path}\n"\
     "Content-Length: 0\n"
   end
 end
