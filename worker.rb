@@ -1,5 +1,5 @@
 require 'http/parser'
-require './dispatcher.rb'
+require './core/dispatcher.rb'
 require './core/request_parser.rb'
 
 class Worker
