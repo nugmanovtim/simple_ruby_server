@@ -8,10 +8,12 @@ class Worker
   end
 
   def perform
-    parse_request
-    prepare_response
-    send_response
-    close_connection
+    Thread.new do
+      parse_request
+      prepare_response
+      send_response
+      close_connection
+    end
   end
 
   private

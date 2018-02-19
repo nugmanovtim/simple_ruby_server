@@ -1,13 +1,26 @@
-Bombarding http://localhost:2000 for 10s using 125 connection(s)
-[=======================================================================================================================================================================================================================================] 10s
+* Without threads
+  Bombarding http://localhost:2000 with 100000 request(s) using 250 connection(s)
+   100000 / 100000 [============================================================================================================================================================================================================] 100.00% 1m18s
+  Done!
+  Statistics        Avg      Stdev        Max
+    Reqs/sec      1276.09    2467.84   10504.16
+    Latency      133.74ms      1.99s      1.17m
+    HTTP codes:
+      1xx - 0, 2xx - 99913, 3xx - 0, 4xx - 0, 5xx - 0
+      others - 87
+    Errors:
+      the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 87
+
+* With threads
+Bombarding http://localhost:2000 with 100000 request(s) using 250 connection(s)
+ 100000 / 100000 [==============================================================================================================================================================================================================] 100.00% 28s
 Done!
 Statistics        Avg      Stdev        Max
-  Reqs/sec      3769.20     606.68    5617.29
-  Latency       33.04ms     5.58ms    98.19ms
+  Reqs/sec      3572.58     857.40    6445.78
+  Latency       60.30ms   362.48ms     27.98s
   HTTP codes:
-    1xx - 0, 2xx - 37840, 3xx - 0, 4xx - 0, 5xx - 0
-    others - 6
+    1xx - 0, 2xx - 99996, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 4
   Errors:
-    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 5
-    error when reading response headers: cannot parse response status code: unexpected first char found. Expecting 0-9. Response "Connection: close\n". Buffer size=18, contents: "Connection: close\n" - 1
-  Throughput:     2.39MB/s
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 4
+  Throughput:     2.20MB/s
