@@ -1,4 +1,5 @@
 require 'time'
+require './core/simple_cache.rb'
 
 class BasicController
   def initialize(request)
@@ -7,7 +8,7 @@ class BasicController
   end
 
   def render(path, status: 200)
-    @body = IO.read(path)
+    @body = SimpleCache.retrieve(path) { IO.read(path) }
     @status = status
     http_response
   end
