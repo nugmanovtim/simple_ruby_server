@@ -5,9 +5,13 @@ class BasicController
     @request_headers = headers
   end
 
-  def render(path)
+  def render(path, status: '200 OK')
     @response_body = IO.read(path)
-    "#{response_headers('200 OK')}\n#{@response_body}"
+    "#{response_headers(status)}\n#{@response_body}"
+  end
+
+  def no_routes_matched
+    render('./views/no_routes_matched.html', status: 404)
   end
 
   private
