@@ -8,7 +8,7 @@ class Worker
   end
 
   def perform
-    Thread.new do
+    @thread = Thread.new do
       parse_request
       prepare_response
       send_response

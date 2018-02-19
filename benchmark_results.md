@@ -61,3 +61,28 @@ Statistics        Avg      Stdev        Max
   Errors:
     the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 6
   Throughput:     2.18MB/s
+  Bombarding http://localhost:2000 with 100000 request(s) using 1000 connection(s)
+   100000 / 100000 [==============================================================================================================================================================================================================] 100.00% 52s
+  Done!
+  Statistics        Avg      Stdev        Max
+    Reqs/sec      1909.32    1932.91   10535.35
+    Latency      260.62ms      2.19s      0.88m
+    HTTP codes:
+      1xx - 0, 2xx - 99932, 3xx - 0, 4xx - 0, 5xx - 0
+      others - 68
+    Errors:
+      the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 68
+    Throughput:     1.20MB/s
+* With bypassing garbage collector
+Bombarding http://localhost:2000 with 100000 request(s) using 1000 connection(s)
+ 100000 / 100000 [==============================================================================================================================================================================================================] 100.00% 44s
+Done!
+Statistics        Avg      Stdev        Max
+  Reqs/sec      2242.61    1877.32   12176.84
+  Latency      229.40ms      1.48s     44.82s
+  HTTP codes:
+    1xx - 0, 2xx - 99966, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 34
+  Errors:
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 34
+  Throughput:     1.41MB/s
