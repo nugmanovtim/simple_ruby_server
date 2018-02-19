@@ -25,8 +25,8 @@ class RequestParser
   end
 
   def setup_parser
-    @parser.on_headers_complete = proc { |headers| puts @headers = headers }
-    @parser.on_body = proc { |chunk| puts @body << chunk }
+    @parser.on_headers_complete = proc { |headers| @headers = headers }
+    @parser.on_body = proc { |chunk| @body << chunk }
     @parser.on_message_complete = proc { @finished = true }
   end
 
