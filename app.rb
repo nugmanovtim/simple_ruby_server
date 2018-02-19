@@ -1,4 +1,4 @@
-require './server.rb'
+require './core/server.rb'
 require 'byebug'
 puts 'Firing up the server'
 Server.new(2000).listen

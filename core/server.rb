@@ -1,5 +1,5 @@
 require 'socket'
-require './worker.rb'
+require './core/worker.rb'
 
 class Server
   def initialize(port)
