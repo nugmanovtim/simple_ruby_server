@@ -12,7 +12,11 @@ class Worker
       parse_request
       prepare_response
       send_response
-      close_connection
+      if keep_alive?
+        @next_worker = Worker.new(@connection).perform
+      else
+        close_connection
+      end
     end
   end
 
@@ -32,5 +36,9 @@ class Worker
 
   def close_connection
     @connection.close
+  end
+
+  def keep_alive?
+    @request.headers['Connection'] == 'keep-alive'
   end
 end

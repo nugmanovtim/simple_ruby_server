@@ -86,3 +86,30 @@ Statistics        Avg      Stdev        Max
   Errors:
     the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 34
   Throughput:     1.41MB/s
+Transactions:                   100000 hits
+Availability:                   100.00 %
+Elapsed time:                  94.29 secs
+Document length:               305 Bytes
+TotalTransfer:                 29.09 MB
+Transaction rate:            1060.53 trans/sec
+Throughput:                     0.31 MB/sec
+Successful:                     100000 hits
+Failed:                           0 hits
+TransactionTime:             945.771 ms(mean)
+ConnectionTime:              486.291 ms(mean)
+ProcessTime:                 459.480 ms(mean)
+StateCode:                    0(code 200)
+* With taking advantage of Keep-Alive
+Transactions:                   100000 hits
+Availability:                   100.00 %
+Elapsed time:                  18.07 secs
+Document length:               328 Bytes
+TotalTransfer:                 14.40 MB
+Transaction rate:            5533.78 trans/sec
+Throughput:                     0.80 MB/sec
+Successful:                     100000 hits
+Failed:                           0 hits
+TransactionTime:             135.413 ms(mean)
+ConnectionTime:                0.000 ms(mean)
+ProcessTime:                 135.413 ms(mean)
+StateCode:                    0(code 200)

@@ -37,6 +37,7 @@ class BasicController
     "HTTP/1.1 #{@status}\n"\
     "Content-Type: text/html; charset=utf-8\n"\
     "Cache-Control: no-cache\n"\
+    "Connection: keep-alive\n"\
     "Date: #{Time.now.rfc822}\n"\
     "Server: TestServer\n" +
       set_cookie_headers +
