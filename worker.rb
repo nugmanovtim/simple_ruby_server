@@ -1,11 +1,11 @@
 require 'http/parser'
+require './dispatcher.rb'
 
 class Worker
   READ_CHUNK = 1024 * 4
   def initialize(connection)
     @connection = connection
     @request = Http::Parser.new
-    @response = ''
   end
 
   def perform
@@ -26,7 +26,7 @@ class Worker
   end
 
   def prepare_response
-    @response << "Time is #{Time.now}"
+    @response = Dispatcher.dispatch(@request)
     puts @response
   end
 
