@@ -12,10 +12,6 @@ class Dispatcher
 
   class NoRoutesMatched < RuntimeError; end
 
-  def self.dispatch(request)
-    Dispatcher.new(request).perform
-  end
-
   def initialize(request)
     @request = request
   end

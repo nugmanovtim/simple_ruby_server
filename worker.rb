@@ -21,7 +21,7 @@ class Worker
   end
 
   def prepare_response
-    @response = Dispatcher.dispatch(@request)
+    @response = Dispatcher.new(@request).perform
     puts @response
   end
 
