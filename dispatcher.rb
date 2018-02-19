@@ -1,23 +1,12 @@
 require './controller.rb'
+require './routes.rb'
 class Dispatcher
-  ROUTES = {
-    'POST' => {
-      '/login' => :login
-    },
-    'GET' => {
-      '/' => :index,
-      '/secret' => :secret
-    }
-  }.freeze
-
-  class NoRoutesMatched < RuntimeError; end
-
   def initialize(request)
     @request = request
   end
 
   def perform
-    ensure_correct_request
+    ensure_request_is_correct
     invoke_controller(grab_action_name)
   rescue NoRoutesMatched
     invoke_controller(:no_routes_matched)
@@ -25,16 +14,18 @@ class Dispatcher
 
   private
 
-  def ensure_correct_request
-    ensure_correct_http_method
-    ensure_correct_url
+  class NoRoutesMatched < RuntimeError; end
+
+  def ensure_request_is_correct
+    ensure_http_method_is_correct
+    ensure_url_is_correct
   end
 
-  def ensure_correct_http_method
+  def ensure_http_method_is_correct
     raise NoRoutesMatched if ROUTES[@request.http_method].nil?
   end
 
-  def ensure_correct_url
+  def ensure_url_is_correct
     raise NoRoutesMatched if grab_action_name.nil?
   end
 
