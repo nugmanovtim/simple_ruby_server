@@ -7,6 +7,7 @@ class Controller < BasicController
   def login
     if correct_credentials?
       set_cookies(session: 'session')
+      set_cookies(sessiasdon: 'sessasdfadsfion')
       redirect_to '/secret'
     else
       redirect_to '/'
@@ -14,6 +15,7 @@ class Controller < BasicController
   end
 
   def secret
+    return redirect_to '/' unless authorized?
     render './views/secret.html'
   end
 
@@ -25,5 +27,9 @@ class Controller < BasicController
     input_username = @request.params['username']
     input_password = @request.params['password']
     correct_username == input_username && correct_password == input_password
+  end
+
+  def authorized?
+    cookies['session'] == 'session'
   end
 end

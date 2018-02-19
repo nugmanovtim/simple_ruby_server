@@ -58,4 +58,9 @@ class BasicController
   def set_cookies(cookies)
     @set_cookies.merge!(cookies)
   end
+
+  def cookies
+    @request.headers['Cookie']&.split('; ')
+            &.map { |pair| pair.split('=', 2) }&.to_h || {}
+  end
 end
