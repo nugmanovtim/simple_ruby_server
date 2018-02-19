@@ -1,11 +1,10 @@
 require 'http/parser'
 require './dispatcher.rb'
+require './core/request_parser.rb'
 
 class Worker
-  READ_CHUNK = 1024 * 4
   def initialize(connection)
     @connection = connection
-    @request = Http::Parser.new
   end
 
   def perform
@@ -18,13 +17,7 @@ class Worker
   private
 
   def parse_request
-    loop do
-      @request << @connection.readpartial(READ_CHUNK)
-      break if @request.headers
-    end
-    puts @request.http_method
-    puts @request.request_url
-    puts @request.headers
+    @request = RequestParser.new(@connection).perform
   end
 
   def prepare_response

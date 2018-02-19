@@ -1,8 +1,8 @@
 require 'time'
 
 class BasicController
-  def initialize(headers)
-    @request_headers = headers
+  def initialize(request)
+    @request = request
   end
 
   def render(path, status: '200 OK')

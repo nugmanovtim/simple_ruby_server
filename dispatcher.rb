@@ -43,7 +43,7 @@ class Dispatcher
   end
 
   def invoke_controller(action)
-    Controller.new(@request.headers).method(action).call
+    Controller.new(@request).method(action).call
   end
 
   def grab_action_name
