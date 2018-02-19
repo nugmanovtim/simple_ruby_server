@@ -22,6 +22,8 @@ class Worker
       @request << @connection.readpartial(READ_CHUNK)
       break if @request.headers
     end
+    puts @request.http_method
+    puts @request.request_url
     puts @request.headers
   end
 
