@@ -3,6 +3,7 @@ require 'time'
 class BasicController
   def initialize(request)
     @request = request
+    @set_cookies = {}
   end
 
   def render(path, status: 200)
@@ -36,15 +37,25 @@ class BasicController
     "Content-Type: text/html; charset=utf-8\n"\
     "Cache-Control: no-cache\n"\
     "Date: #{Time.now.rfc822}\n"\
-    "Server: TestServer\n"\
-    "Content-Length: #{@body.bytesize}\n"\
-    "\n"
+    "Server: TestServer\n" +
+      set_cookie_headers +
+      "Content-Length: #{@body.bytesize}\n"\
+      "\n"
   end
 
   def redirect_headers
     "HTTP/1.1 #{@status}\n"\
     "Content-Type: text/html; charset=utf-8\n"\
-    "Location: #{@redirect_path}\n"\
-    "Content-Length: 0\n"
+    "Location: #{@redirect_path}\n" +
+      set_cookie_headers +
+      "Content-Length: 0\n"
+  end
+
+  def set_cookie_headers
+    @set_cookies.map { |key, value| "Set-Cookie: #{key}=#{value}\n" }.join('')
+  end
+
+  def set_cookies(cookies)
+    @set_cookies.merge!(cookies)
   end
 end

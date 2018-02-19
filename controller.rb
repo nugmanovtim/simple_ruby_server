@@ -6,6 +6,7 @@ class Controller < BasicController
 
   def login
     if correct_credentials?
+      set_cookies(session: 'session')
       redirect_to '/secret'
     else
       redirect_to '/'
