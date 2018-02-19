@@ -1,10 +1,7 @@
-class Controller
-  def initialize(headers)
-    @headers = headers
-  end
-
+require './core/basic_controller'
+class Controller < BasicController
   def index
-    "Time is #{Time.now}"
+    render './views/index.html'
   end
 
   def login
