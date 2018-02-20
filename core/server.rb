@@ -1,4 +1,5 @@
 require 'socket'
+require 'set'
 require './core/worker.rb'
 
 class Server
@@ -8,8 +9,14 @@ class Server
   end
 
   def listen
+    threads = Set.new
+    initial_workers = Set.new
     loop do
-      Worker.new(@server.accept).perform
+      connection = @server.accept
+      worker = Worker.new(connection)
+      thread = Thread.new { worker.perform }
+      threads.add(thread)
+      initial_workers.add(worker)
     end
   end
 end

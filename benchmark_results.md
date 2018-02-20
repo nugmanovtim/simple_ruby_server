@@ -113,3 +113,17 @@ TransactionTime:             135.413 ms(mean)
 ConnectionTime:                0.000 ms(mean)
 ProcessTime:                 135.413 ms(mean)
 StateCode:                    0(code 200)
+* With improved performance
+Transactions:                   100000 hits
+Availability:                   100.00 %
+Elapsed time:                  13.33 secs
+Document length:               328 Bytes
+TotalTransfer:                 14.40 MB
+Transaction rate:            7504.25 trans/sec
+Throughput:                     1.08 MB/sec
+Successful:                     100000 hits
+Failed:                           0 hits
+TransactionTime:              73.418 ms(mean)
+ConnectionTime:                0.000 ms(mean)
+ProcessTime:                  73.418 ms(mean)
+StateCode:                    0(code 200)

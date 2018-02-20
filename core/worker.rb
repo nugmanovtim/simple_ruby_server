@@ -8,15 +8,13 @@ class Worker
   end
 
   def perform
-    @thread = Thread.new do
-      parse_request
-      prepare_response
-      send_response
-      if keep_alive?
-        @next_worker = Worker.new(@connection).perform
-      else
-        close_connection
-      end
+    parse_request
+    prepare_response
+    send_response
+    if keep_alive?
+      @next_worker = Worker.new(@connection).perform
+    else
+      close_connection
     end
   rescue EOFError, Errno::ECONNRESET
     close_connection
