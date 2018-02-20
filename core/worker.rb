@@ -18,7 +18,7 @@ class Worker
     end
   rescue EOFError, Errno::ECONNRESET
     close_connection
-  rescue Exception => e
+  rescue StandardError => e
     puts e.message
     puts e.backtrace
     close_connection
