@@ -18,6 +18,12 @@ class Worker
         close_connection
       end
     end
+  rescue EOFError, Errno::ECONNRESET
+    close_connection
+  rescue Exception => e
+    puts e.message
+    puts e.backtrace
+    close_connection
   end
 
   private
