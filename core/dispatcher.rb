@@ -12,6 +12,10 @@ class Dispatcher
     invoke_controller(:no_routes_matched)
   end
 
+  def self.grab_action_name(http_method, url)
+    ROUTES[http_method][url]
+  end
+
   private
 
   class NoRoutesMatched < RuntimeError; end
@@ -34,6 +38,6 @@ class Dispatcher
   end
 
   def grab_action_name
-    ROUTES[@request.http_method][@request.request_url]
+    Dispatcher.grab_action_name(@request.http_method, @request.request_url)
   end
 end

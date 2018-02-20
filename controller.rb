@@ -1,7 +1,7 @@
 require './core/basic_controller'
 class Controller < BasicController
   def index
-    render './views/index.html'
+    render 'index'
   end
 
   def login
@@ -15,7 +15,7 @@ class Controller < BasicController
 
   def secret
     return redirect_to '/' unless authorized?
-    render './views/secret.html'
+    render 'secret'
   end
 
   private

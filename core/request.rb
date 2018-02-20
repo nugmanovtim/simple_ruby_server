@@ -8,6 +8,10 @@ class Request
     parse_params
   end
 
+  def keep_alive?
+    @headers['Connection'] == 'keep-alive'
+  end
+
   private
 
   def parse_params
