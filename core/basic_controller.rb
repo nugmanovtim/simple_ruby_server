@@ -1,4 +1,5 @@
 require 'time'
+require 'zlib'
 require './core/simple_cache.rb'
 require './core/dispatcher.rb'
 
@@ -26,7 +27,8 @@ class BasicController
   private
 
   def response_with_body(status, body)
-    response_headers(status, body) << body
+    body_to_send = try_encode_body(body)
+    response_headers(status, body_to_send) << body_to_send
   end
 
   def response_headers(status, body)
@@ -37,7 +39,8 @@ class BasicController
     "Date: #{Time.now.rfc822}\n"\
     "Server: TestServer\n" +
       set_cookie_headers +
-      "Content-Length: #{body.bytesize}\n"\
+      "Content-Length: #{body.bytesize}\n" +
+      content_encoding +
       "\n"
   end
 
@@ -64,6 +67,24 @@ class BasicController
 
   def set_cookies(cookies)
     @set_cookies.merge!(cookies)
+  end
+
+  def try_encode_body(body)
+    return body unless @request.gzip?
+    gzip(body)
+  end
+
+  def gzip(string, level: Zlib::BEST_SPEED, strategy: Zlib::DEFAULT_STRATEGY)
+    sio = StringIO.new
+    sio.binmode
+    gz = Zlib::GzipWriter.new(sio, level, strategy)
+    gz.write(string)
+    gz.close
+    sio.string
+  end
+
+  def content_encoding
+    @request.gzip? ? "Content-Encoding: gzip\n" : ''
   end
 
   def cookies

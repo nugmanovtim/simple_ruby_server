@@ -12,6 +12,11 @@ class Request
     @headers['Connection'] == 'keep-alive'
   end
 
+  def gzip?
+    return false if @headers.nil?
+    @headers['Accept-Encoding']&.split(', ')&.include? 'gzip'
+  end
+
   private
 
   def parse_params
