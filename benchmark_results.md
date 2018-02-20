@@ -1,3 +1,18 @@
+Current (1000 simultaneous connections):
+Transactions:                   100000 hits
+Availability:                   100.00 %
+Elapsed time:                  13.33 secs
+Document length:               328 Bytes
+TotalTransfer:                 14.40 MB
+Transaction rate:            7504.25 trans/sec
+Throughput:                     1.08 MB/sec
+Successful:                     100000 hits
+Failed:                           0 hits
+TransactionTime:              73.418 ms(mean)
+ConnectionTime:                0.000 ms(mean)
+ProcessTime:                  73.418 ms(mean)
+StateCode:                    0(code 200)
+HISTORY:
 * Without threads
   Bombarding http://localhost:2000 with 100000 request(s) using 250 connection(s)
    100000 / 100000 [============================================================================================================================================================================================================] 100.00% 1m18s
