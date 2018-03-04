@@ -20,6 +20,7 @@ class Controller < BasicController
 
   private
 
+  # Implementation of authorization methods is not the goal of this repo.
   def correct_credentials?
     correct_username = 'admin'
     correct_password = 'admin'
